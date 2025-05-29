@@ -6,6 +6,7 @@ from langchain_core.runnables import RunnableLambda
 from langgraph.graph import StateGraph, END
 from langchain_community.chat_message_histories import RedisChatMessageHistory
 from langchain.memory import ConversationBufferMemory
+from dotenv import load_dotenv
 import redis
 import os
 
@@ -16,6 +17,8 @@ import os
 # [LLM von Hugging Face erzeugt Antwort basierend auf Kontext]
 #    ↓
 # [Antwort an Nutzer]
+
+load_dotenv()
 
 # 🔐 API-Key für Hugging Face setzen (oder als Umgebungsvariable exportieren)
 api_token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
