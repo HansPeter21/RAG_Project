@@ -1,122 +1,128 @@
+import streamlit as st
+from dotenv import load_dotenv
+import os
+import fitz  # PyMuPDF
+
 from langchain_community.vectorstores import FAISS
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+from langchain_huggingface import (
+    HuggingFaceEmbeddings,
+    ChatHuggingFace,
+    HuggingFaceEndpoint,
+)
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_core.runnables import RunnableLambda
 from langgraph.graph import StateGraph, END
 from langchain_community.chat_message_histories import RedisChatMessageHistory
 from langchain.memory import ConversationBufferMemory
-from dotenv import load_dotenv
+from langchain_core.runnables import RunnableLambda
 import redis
-import os
 
-# [Frage vom Nutzer]
-#    ↓
-# [Retriever holt relevante Texte]
-#    ↓
-# [LLM von Hugging Face erzeugt Antwort basierend auf Kontext]
-#    ↓
-# [Antwort an Nutzer]
-
+# ⬇️ .env laden
 load_dotenv()
-
-# 🔐 API-Key für Hugging Face setzen (oder als Umgebungsvariable exportieren)
 api_token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
-# 📘 1. Beispieltexte vorbereiten (diese würden aus PDF oder Ähnlichem kommen)
-texts = [
-    "RAG steht für Retrieval-Augmented Generation und kombiniert Suche mit LLM.",
-    "LangGraph ist ein Tool zur Orchestrierung von KI-Workflows auf Graphbasis.",
-    "FAISS ist eine Bibliothek zur schnellen Ähnlichkeitssuche auf Vektoren.",
-]
 
-# Text in kleinere Abschnitte aufteilen
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
-chunks = []
-for text in texts:
-    chunks.extend(text_splitter.split_text(text))
-
-# 📐 2. Embeddings + Retriever vorbereiten
-embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-db = FAISS.from_texts(chunks, embedding=embeddings)
-
-retriever = db.as_retriever()
-
-# 🔴 Redis-Verbindung aufbauen
-redis_client = redis.Redis(host="localhost", port=6379, db=0)
-history = RedisChatMessageHistory(session_id="session_1")
-memory = ConversationBufferMemory(chat_memory=history, return_messages=True)
-
-# 🧠 4. LLM von Hugging Face konfigurieren
-llm = ChatHuggingFace(
-    llm=HuggingFaceEndpoint(
-        repo_id="deepseek-ai/DeepSeek-R1-0528",
-        task="conversational",
-        huggingfacehub_api_token=api_token,
-        max_new_tokens=512,
-        do_sample=False,
-    ),
-    verbose=False,
-)
+# 📘 PDF-Text extrahieren
+def extract_text_from_pdf(file):
+    doc = fitz.open(stream=file.read(), filetype="pdf")
+    return "\n".join(page.get_text() for page in doc)
 
 
-# 🔍 5. Retriever-Funktion
-def retrieve(state):
-    query = state["question"]
-    docs = retriever.invoke(query)
-    state["docs"] = docs
-    return state
+# 🧱 Text in Chunks
+def chunk_text(text):
+    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    return splitter.split_text(text)
 
 
-# ✍️ 6. Antwort generieren mit Memory-Integration
-def generate_answer(state):
-    query = state["question"]
-    docs = state["docs"]
-
-    # Chat-Verlauf aus Memory laden (Liste von Messages)
-    chat_history = memory.load_memory_variables({}).get("history", [])
-
-    # Chat-Verlauf als Text (User + Assistant Nachrichten)
-    history_text = ""
-    for msg in chat_history:
-        role = msg.type  # z.B. "human" oder "ai"
-        content = msg.content
-        prefix = "User:" if role == "human" else "Assistant:"
-        history_text += f"{prefix} {content}\n"
-
-    # Kontext aus Dokumenten
-    context = "\n\n".join([doc.page_content for doc in docs])
-
-    # Prompt mit Chat-Historie, Kontext und Frage
-    prompt = (
-        f"Du bist ein hilfreicher Assistent.\n"
-        f"Hier ist der bisherige Chatverlauf:\n{history_text}\n"
-        f"Basierend auf folgendem Kontext beantworte die Frage:\n{context}\n\n"
-        f"Frage: {query}"
+# 🧠 Hugging Face LLM
+def load_llm():
+    return ChatHuggingFace(
+        llm=HuggingFaceEndpoint(
+            repo_id="deepseek-ai/DeepSeek-R1-0528",
+            task="conversational",
+            huggingfacehub_api_token=api_token,
+            max_new_tokens=512,
+            do_sample=False,
+        ),
+        verbose=False,
     )
 
-    answer = llm.invoke(prompt)
 
-    # User-Message + Antwort in Memory speichern
-    memory.chat_memory.add_user_message(query)
-    memory.chat_memory.add_ai_message(answer.content)
-
-    state["answer"] = answer.content
-    return state
+# 📦 Redis + Memory
+def get_memory():
+    history = RedisChatMessageHistory(session_id="streamlit_session")
+    return ConversationBufferMemory(chat_memory=history, return_messages=True)
 
 
-# 🧠 7. LangGraph erstellen
-graph = StateGraph(state_schema=dict)
-graph.add_node("retriever", RunnableLambda(retrieve))
-graph.add_node("llm", RunnableLambda(generate_answer))
-graph.set_entry_point("retriever")
-graph.add_edge("retriever", "llm")
-graph.add_edge("llm", END)
+# 🔍 Retriever
+def build_retriever(texts):
+    embeddings = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
+    )
+    db = FAISS.from_texts(texts, embedding=embeddings)
+    return db.as_retriever()
 
-# 🧵 8. Kompilieren und verwenden
-app = graph.compile()
 
-# 🚀 9. Testaufruf
-frage = "Was ist LangGraph?"
-result = app.invoke({"question": frage})
-print("Antwort:\n", result["answer"])
+# 🔄 LangGraph
+def build_app(retriever, llm, memory):
+    def retrieve(state):
+        query = state["question"]
+        docs = retriever.invoke(query)
+        state["docs"] = docs
+        return state
+
+    def generate(state):
+        query = state["question"]
+        docs = state["docs"]
+        chat_history = memory.load_memory_variables({}).get("history", [])
+        history_text = "\n".join(
+            ("User: " if msg.type == "human" else "Assistant: ") + msg.content
+            for msg in chat_history
+        )
+        context = "\n\n".join(doc.page_content for doc in docs)
+        prompt = (
+            f"Du bist ein hilfreicher Assistent.\n"
+            f"Hier ist der bisherige Chatverlauf:\n{history_text}\n"
+            f"Basierend auf folgendem Kontext beantworte die Frage:\n{context}\n\n"
+            f"Frage: {query}"
+        )
+        response = llm.invoke(prompt)
+        memory.chat_memory.add_user_message(query)
+        memory.chat_memory.add_ai_message(response.content)
+        state["answer"] = response.content
+        return state
+
+    graph = StateGraph(state_schema=dict)
+    graph.add_node("retriever", RunnableLambda(retrieve))
+    graph.add_node("llm", RunnableLambda(generate))
+    graph.set_entry_point("retriever")
+    graph.add_edge("retriever", "llm")
+    graph.add_edge("llm", END)
+    return graph.compile()
+
+
+# 🌐 Streamlit UI
+st.title("🔍 RAG + LangGraph auf PDFs")
+
+uploaded_file = st.file_uploader("📄 PDF hochladen", type=["pdf"])
+
+if uploaded_file:
+    raw_text = extract_text_from_pdf(uploaded_file)
+    st.success("📄 PDF geladen!")
+
+    if "retriever" not in st.session_state:
+        chunks = chunk_text(raw_text)
+        retriever = build_retriever(chunks)
+        memory = get_memory()
+        llm = load_llm()
+        app = build_app(retriever, llm, memory)
+        st.session_state.app = app
+        st.session_state.ready = True
+
+if st.session_state.get("ready", False):
+    question = st.text_input("❓ Frage stellen:")
+
+    if question:
+        with st.spinner("⏳ Antwort wird generiert..."):
+            result = st.session_state.app.invoke({"question": question})
+            st.success("✅ Antwort:")
+            st.markdown(result["answer"])
