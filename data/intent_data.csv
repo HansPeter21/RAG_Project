@@ -1,0 +1,200 @@
+text,label
+"Wie spät ist es?",question
+"Wer ist der aktuelle Bundespräsident?",question
+"Was ist die Hauptstadt von Australien?",question
+"Erzähl mir etwas über die Geschichte der Raumfahrt.",question
+"Wie funktioniert Photosynthese?",question
+"Was sind die Symptome einer Grippe?",question
+"Wer hat die Relativitätstheorie entwickelt?",question
+"Kannst du mir die Funktionsweise eines Kühlschranks erklären?",question
+"Was bedeutet 'Demokratie'?",question
+"Wie hoch ist der Mount Everest?",question
+"Was ist der Unterschied zwischen Wetter und Klima?",question
+"Wie viele Kontinente gibt es?",question
+"Wer schrieb 'Faust'?",question
+"Wie wird Strom erzeugt?",question
+"Was ist künstliche Intelligenz?",question
+"Nenne mir die größten Städte Deutschlands.",question
+"Was ist ein Schwarzes Loch?",question
+"Wie funktioniert ein Computer?",question
+"Wer erfand die Glühbirne?",question
+"Was ist die DNA?",question
+"Wie lange dauert ein Flug nach New York?",question
+"Was sind die aktuellen Nachrichten?",question
+"Wer ist der amtierende Fußball-Weltmeister?",question
+"Wie viele Knochen hat der menschliche Körper?",question
+"Was ist die Schwerkraft?",question
+"Erkläre mir das Konzept der Blockchain.",question
+"Was ist der pH-Wert?",question
+"Wie entsteht ein Regenbogen?",question
+"Wer war Leonardo da Vinci?",question
+"Was ist die Ozonschicht?",question
+"Wie funktioniert ein Motorrad?",question
+"Was ist die Photosynthese bei Pflanzen?",question
+"Wer ist der Regisseur von 'Inception'?",question
+"Was ist der Sinn des Lebens?",question
+"Wie kann ich meine Steuererklärung machen?",question
+"Was sind die größten Meere der Welt?",question
+"Wer komponierte die 'Neunte Symphonie'?",question
+"Was ist ein Algorithmus?",question
+"Wie hoch ist der Eiffelturm?",question
+"Was ist die Bedeutung von 'Nachhaltigkeit'?",question
+"Wer hat den Buchdruck erfunden?",question
+"Was ist die Definition von 'Gravitation'?",question
+"Wie viele Sterne gibt es im Universum?",question
+"Was ist die schnellste Tierart?",question
+"Wer war Albert Einstein?",question
+"Was ist eine Aktie?",question
+"Wie entsteht Wind?",question
+"Was ist der Treibhauseffekt?",question
+"Wer schrieb 'Romeo und Julia'?",question
+"Wie funktioniert ein Smartphone?",question
+"Fasse den Artikel über erneuerbare Energien zusammen.",summary_request
+"Gib mir eine Zusammenfassung des Berichts vom letzten Quartal.",summary_request
+"Kannst du die wichtigsten Punkte des Vortrags zusammenfassen?",summary_request
+"Bitte fass den Inhalt dieser E-Mail kurz und bündig zusammen.",summary_request
+"Mach eine kurze Zusammenfassung des Buches '1984'.",summary_request
+"Zusammenfassung des heutigen Nachrichtenüberblicks bitte.",summary_request
+"Fasse die Highlights des Fußballspiels zusammen.",summary_request
+"Kannst du mir die Kernaussagen des Protokolls zusammenfassen?",summary_request
+"Bitte gib mir eine Zusammenfassung der Debatte.",summary_request
+"Fasse diesen langen Text für mich zusammen.",summary_request
+"Kannst du mir das Wichtigste aus dem Dokument extrahieren?",summary_request
+"Mach eine Kurzzusammenfassung der Ereignisse.",summary_request
+"Fasse den Wissenschaftsartikel zusammen.",summary_request
+"Gib mir eine schnelle Übersicht über die Ergebnisse.",summary_request
+"Bitte fasse die Konferenznotizen zusammen.",summary_request
+"Kannst du das Kapitel für mich zusammenfassen?",summary_request
+"Erstelle eine Zusammenfassung der Diskussion.",summary_request
+"Fasse die Hauptargumente zusammen.",summary_request
+"Gib mir eine kompakte Zusammenfassung der Studie.",summary_request
+"Bitte fasse den Inhalt des Videos zusammen.",summary_request
+"Fasse die Pressemitteilung zusammen.",summary_request
+"Kannst du die Zusammenfassung der Sitzung erstellen?",summary_request
+"Bitte fass die wichtigsten Fakten zusammen.",summary_request
+"Gib mir einen Überblick über die Entwicklung.",summary_request
+"Fasse die Resultate zusammen.",summary_request
+"Kannst du das Seminar für mich zusammenfassen?",summary_request
+"Bitte fasse die Punkte der Tagesordnung zusammen.",summary_request
+"Gib eine kurze Zusammenfassung der aktuellen Situation.",summary_request
+"Fasse den Geschäftsbericht zusammen.",summary_request
+"Kannst du mir die Quintessenz des Gesprächs geben?",summary_request
+"Bitte fasse die Präsentation zusammen.",summary_request
+"Fasse die Ergebnisse der Umfrage zusammen.",summary_request
+"Gib mir eine Zusammenfassung der Lehrbuchkapitel.",summary_request
+"Fasse den Zeitungsartikel zusammen.",summary_request
+"Kannst du die Argumente des Gegners zusammenfassen?",summary_request
+"Bitte fasse den Roman für mich zusammen.",summary_request
+"Fasse die Hauptgedanken zusammen.",summary_request
+"Gib mir einen kurzen Überblick über die Faktenlage.",summary_request
+"Fasse die historischen Ereignisse zusammen.",summary_request
+"Kannst du die Fallstudie zusammenfassen?",summary_request
+"Bitte fasse die Forschungsergebnisse zusammen.",summary_request
+"Fasse die Empfehlungen zusammen.",summary_request
+"Gib mir eine Zusammenfassung des Filmplots.",summary_request
+"Fasse die wesentlichen Punkte zusammen.",summary_request
+"Kannst du den Blogbeitrag zusammenfassen?",summary_request
+"Bitte fasse die Verkaufszahlen zusammen.",summary_request
+"Fasse die Beschwerde zusammen.",summary_request
+"Gib mir eine Zusammenfassung der Produktdetails.",summary_request
+"Fasse die Reiseroute zusammen.",summary_request
+"Kannst du die Regeln zusammenfassen?",summary_request
+"Das ist super, vielen Dank!",feedback
+"Ich bin sehr zufrieden mit deiner Leistung.",feedback
+"Das war wirklich hilfreich.",feedback
+"Deine Antwort war sehr präzise.",feedback
+"Ich mag diese Funktion.",feedback
+"Das hat mir sehr geholfen.",feedback
+"Super Arbeit!",feedback
+"Ich finde das hervorragend.",feedback
+"Das ist genau das, was ich brauchte.",feedback
+"Vielen Dank für die schnelle Antwort.",feedback
+"Das ist nicht korrekt.",feedback
+"Deine Antwort hat mir nicht weitergeholfen.",feedback
+"Das ist völlig falsch.",feedback
+"Ich bin enttäuscht von dieser Reaktion.",feedback
+"Das ist eine schlechte Empfehlung.",feedback
+"Ich finde deine Antwort unzureichend.",feedback
+"Das hat nicht funktioniert.",feedback
+"Ich bin nicht zufrieden damit.",feedback
+"Das ist irreführend.",feedback
+"Ich verstehe das nicht, bitte klarer erklären.",feedback
+"Das ist in Ordnung.",feedback
+"Es war okay, aber nicht herausragend.",feedback
+"Könnte besser sein.",feedback
+"Es war ganz gut.",feedback
+"Nicht schlecht.",feedback
+"Guter Versuch.",feedback
+"Das ist akzeptabel.",feedback
+"Es war ausreichend.",feedback
+"Kann man so lassen.",feedback
+"Ganz passabel.",feedback
+"Das war eine wirklich tolle Erklärung.",feedback
+"Absolut perfekt!",feedback
+"Danke für die Klarheit.",feedback
+"Deine Hilfe ist unbezahlbar.",feedback
+"Das ist die beste Antwort, die ich bekommen habe.",feedback
+"Einwandfrei!",feedback
+"Klasse, weiter so!",feedback
+"Ich bin begeistert.",feedback
+"Hervorragend gelöst.",feedback
+"Das war nicht hilfreich.",feedback
+"Das ist ein Fehler.",feedback
+"Ich bin frustriert.",feedback
+"Das hat meine Erwartungen nicht erfüllt.",feedback
+"Schlechter Service.",feedback
+"Ich bin genervt.",feedback
+"Das muss überarbeitet werden.",feedback
+"Das ist eine Katastrophe.",feedback
+"Ich bin wütend darüber.",feedback
+"Das geht gar nicht.",feedback
+"Bitte suche im Internet nach den neuesten Nachrichten.",internet_search
+"Google mir die Definition von 'Quantenverschränkung'.",internet_search
+"Ich möchte online nach Rezepten für veganes Chili suchen.",internet_search
+"Finde Informationen über den Klimawandel im Web.",internet_search
+"Suche im Internet nach den Öffnungszeiten des Louvre.",internet_search
+"Bitte recherchiere die Geschichte der römischen Kaiser im Internet.",internet_search
+"Finde mir die neuesten Trends in der Modebranche online.",internet_search
+"Google die Wettervorhersage für morgen.",internet_search
+"Ich brauche Informationen zu XY, suche das bitte im Netz.",internet_search
+"Websuche nach 'Rezepte für italienische Pasta'.",internet_search
+"Finde aktuelle Börsenkurse online.",internet_search
+"Bitte suche im Web nach guten Wanderwegen in der Schweiz.",internet_search
+"Recherchiere die Biografie von Marie Curie im Internet.",internet_search
+"Finde Artikel über künstliche Intelligenz im Netz.",internet_search
+"Online nach Flügen suchen.",internet_search
+"Google mal die aktuellen Goldpreise.",internet_search
+"Suche im Internet nach 'Top 10 Sehenswürdigkeiten Paris'.",internet_search
+"Finde Informationen über erneuerbare Energien online.",internet_search
+"Bitte recherchiere die Geschichte der Fotografie im Internet.",internet_search
+"Websuche nach 'beste Laptops 2025'.",internet_search
+"Finde mir die aktuellen Kinostarts im Netz.",internet_search
+"Bitte suche im Web nach 'Wohnungen zu mieten in Berlin'.",internet_search
+"Recherchiere die Auswirkungen des Brexit im Internet.",internet_search
+"Finde Studien über die Effektivität von Schlaf.",internet_search
+"Online nach Gebrauchtwagen suchen.",internet_search
+"Google die nächsten Mondphasen.",internet_search
+"Suche im Internet nach 'gesunde Frühstücksideen'.",internet_search
+"Finde Informationen über die Olympischen Spiele online.",internet_search
+"Bitte recherchiere die Geschichte der Musik im Internet.",internet_search
+"Websuche nach 'Yoga-Übungen für Anfänger'.",internet_search
+"Finde mir die beliebtesten Reiseziele im Netz.",internet_search
+"Bitte suche im Web nach 'Universitäten in Deutschland'.",internet_search
+"Recherchiere die Bedeutung von 'Nachhaltigkeit' im Internet.",internet_search
+"Finde Artikel über die Zukunft der Arbeit online.",internet_search
+"Online nach Versicherungsvergleichen suchen.",internet_search
+"Google die Telefonnummer der Stadtverwaltung.",internet_search
+"Suche im Internet nach 'einfache Nudelrezepte'.",internet_search
+"Finde Informationen über den Mars im Netz.",internet_search
+"Bitte recherchiere die Geschichte der Mode im Internet.",internet_search
+"Websuche nach 'Meditationsanleitungen'.",internet_search
+"Finde mir die besten Fitnessstudios in meiner Nähe online.",internet_search
+"Bitte suche im Web nach 'günstige Hotels in Rom'.",internet_search
+"Recherchiere die neuesten wissenschaftlichen Entdeckungen im Internet.",internet_search
+"Finde Informationen über das römische Reich online.",internet_search
+"Online nach Jobs suchen.",internet_search
+"Google die Öffnungszeiten des örtlichen Supermarkts.",internet_search
+"Suche im Internet nach 'tipps für besseren Schlaf'.",internet_search
+"Finde Informationen über berühmte Zitate im Netz.",internet_search
+"Bitte recherchiere die Geschichte der Kunst im Internet.",internet_search
+"Websuche nach 'gesunde Smoothies'.",internet_search
