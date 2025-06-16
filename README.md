@@ -1,57 +1,26 @@
-# 🤖 Multi-Agent RAG System mit LangGraph, FAISS & Streamlit
+# 🧠 Multi-Agent RAG mit LangGraph, Streamlit & Huggingface
 
-Dieses Projekt implementiert ein **Multi-Agent Retrieval-Augmented Generation (RAG) System**, das mit **LangGraph** orchestriert wird. Es verwendet zwei spezialisierte Agenten zur Verarbeitung natürlicher Sprache, unterstützt **Memory** mit Redis, verarbeitet **PDF-Dokumente** und bietet eine benutzerfreundliche Oberfläche mit **Streamlit**.
+Dieses Projekt ist eine interaktive Streamlit-Anwendung, die eine Multi-Agenten-RAG-Architektur verwendet, um Fragen zu PDF-Dokumenten zu beantworten oder bei Bedarf eine Websuche durchzuführen. Die Agentenlogik basiert auf [LangGraph](https://github.com/langchain-ai/langgraph).
 
----
+## 🚀 Features
 
-## ✅ Projektziele
+- 📄 PDF-Upload & -Verarbeitung mit `PyMuPDF`
+- 🔎 Semantische Vektorsuche mit FAISS & Huggingface Embeddings
+- 🧠 Intenterkennung via Zero-Shot-Classifikation
+- 🌐 Live-Websuche mit `duckduckgo_search`
+- 🤖 Generierung von Antworten über Huggingface LLMs (z. B. Mistral-7B)
+- 🧵 Chatverlauf (persistiert in Redis, falls verfügbar)
 
-### 1. Implementierung eines Multi-Agenten-RAG-Systems
+## 📦 Abhängigkeiten
 
-- [x] **RetrieverAgent** zur semantischen Suche relevanter Inhalte aus Dokumenten
-- [x] **GeneratorAgent** zur Erzeugung von Antworten auf Benutzerfragen
-- [x] **Frei wählbare Dokumentbasis** (z. B. technische Publikationen, Nachrichten, Finanzberichte)
-- [x] **Zusammenfassungsfunktion** langer Dokumente (via Prompt Engineering möglich)
-- [x] **Benutzeroberfläche mit Streamlit**
-  - [x] PDF-Upload
-  - [x] Interaktive Frage-Antwort-Funktion
-  - [x] Ausgabe der generierten Antworten
-- [x] Kein Guardrails-System notwendig (z. B. Moderation, Filterung)
+- Python ≥ 3.10  
+- `.env`-Datei mit Huggingface API-Token
 
----
+### 🛠️ Installation
 
-### 2. Memory-Integration
-
-- [x] **Persistente Speicherung** von Chatverläufen mit Redis
-- [x] Integration mit `LangChain` Memory-System
-
----
-
-### 3. Autonomes Entscheidungsmanagement (fortgeschrittenes Ziel)
-
-- [ ] Agenten analysieren die semantische Struktur der Nutzeranfrage
-- [ ] Dynamische Auswahl von Datenquellen
-- [ ] Anpassung der Prompts auf Basis von Feedback (z. B. Follow-up-Fragen, Bewertung)
-
----
-
-## ⚙️ Technische Architektur
-
-| Komponente               | Beschreibung                                                                 |
-|--------------------------|------------------------------------------------------------------------------|
-| `LangGraph`              | Graphbasierte Orchestrierung für Agenten-Workflows mit Schleifen & Feedback |
-| `RetrieverAgent`         | Führt semantische Suche mit FAISS aus                                        |
-| `GeneratorAgent`         | Verwendet HuggingFace LLM zur Antwortgenerierung                             |
-| `FAISS`                  | Vektorsuche für eingebettete Dokumente                                       |
-| `Redis`                  | Speicherung von Chatverlauf für Kontextwahrung                               |
-| `Streamlit`              | Weboberfläche für Upload, Frage & Antwort                                    |
-| `dotenv`                 | Umgebungsvariablen (API-Schlüssel)                                           |
-
----
-
-## 📦 Setup
-
-1. **.env Datei erstellen**
-
-```env
-HUGGINGFACEHUB_API_TOKEN=hf_...
+```bash
+git clone https://github.com/dein-benutzername/langgraph-multiagent-rag.git
+cd langgraph-multiagent-rag
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
